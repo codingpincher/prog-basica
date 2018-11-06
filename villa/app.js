@@ -1,27 +1,84 @@
 var jsCanvas = document.getElementById("canvas");
 var contextCanvas = jsCanvas.getContext("2d");
-var img_mapa = "images/tile.png";
-var img_vaca = 'images/vaca.png'
-var x_aleatorio = aleatorio(0, 420);
-var y_aleatorio = aleatorio(0, 420);
 
-var fondo = new Image();
-fondo.src = img_mapa;
-fondo.addEventListener("load", dibujarFondo);
-
-var vaca = new Image();
-vaca.src = img_vaca;
-vaca.addEventListener("load", dibujarElemento)
-
-
-function dibujarElemento()
-{
-  contextCanvas.drawImage(vaca, x_aleatorio, y_aleatorio);
+var vaca = {
+  url: 'images/vaca.png',
+  cargaOk: false
+}
+var pollo = {
+  url: 'images/pollo.png',
+  cargaOk: false
+}
+var cerdo = {
+  url: 'images/cerdo.png',
+  cargaOk: false
+}
+var fondo = {
+  url: 'images/tile.png',
+  cargaOk: false
 }
 
-function dibujarFondo()
+fondo.imagen = new Image();
+fondo.imagen.src = fondo.url;
+fondo.imagen.addEventListener("load", cargarFondo);
+
+vaca.imagen = new Image();
+vaca.imagen.src = vaca.url;
+vaca.imagen.addEventListener("load", cargarVaca);
+
+cerdo.imagen = new Image();
+cerdo.imagen.src = cerdo.url;
+cerdo.imagen.addEventListener("load", cargarCerdo);
+
+pollo.imagen = new Image();
+pollo.imagen.src = pollo.url;
+pollo.imagen.addEventListener("load", cargarPollo);
+
+function cargarFondo()
 {
-  contextCanvas.drawImage(fondo, 0, 0);
+  fondo.cargaOk = true;
+  dibujar();
+}
+function cargarVaca()
+{
+  vaca.cargaOk = true;
+  dibujar();
+}
+function cargarCerdo()
+{
+  cerdo.cargaOk = true;
+  dibujar();
+}
+function cargarPollo()
+{
+  pollo.cargaOk = true;
+  dibujar();
+}
+
+function dibujar()
+{
+  if (fondo.cargaOk)
+  {
+    contextCanvas.drawImage(fondo.imagen, 0, 0);
+  }
+  if (vaca.cargaOk)
+  {
+    var x = aleatorio(0, 420)
+    var y = aleatorio(0, 420)
+    contextCanvas.drawImage(vaca.imagen, x, y);
+  }
+  if (cerdo.cargaOk)
+  {
+    var x = aleatorio(0, 420)
+    var y = aleatorio(0, 420)
+    contextCanvas.drawImage(cerdo.imagen, x, y);
+  }
+  if (pollo.cargaOk)
+  {
+    var x = aleatorio(0, 420)
+    var y = aleatorio(0, 420)
+    contextCanvas.drawImage(pollo.imagen, x, y);
+  }
 }
 
 
